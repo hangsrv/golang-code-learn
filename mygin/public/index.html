@@ -1,0 +1,25 @@
+<h1>hello lp</h1>
+
+<script>
+    // 创建XMLHttpRequest对象
+    var xhr = new XMLHttpRequest();
+  
+    // 设置请求方法和URL
+    xhr.open('GET', 'http://localhost:18080/api/test', true);
+  
+    // 设置响应处理函数
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          // 请求成功，处理响应数据
+          console.log(xhr.responseText);
+        } else {
+          // 请求失败，处理错误
+          console.error('请求失败');
+        }
+      }
+    };
+  
+    // 发送请求
+    xhr.send();
+  </script>
