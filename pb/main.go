@@ -1,17 +1,15 @@
 package main
 
 import (
-	"golang-code-learn/pb/user"
+	pb "golang-code-learn/pb/hello_service"
 	"log"
 
 	"google.golang.org/protobuf/proto"
 )
 
 func main() {
-	u := &user.User{
-		Name:  "hang",
-		Age:   23,
-		Hobby: []string{"1", "2", "3"},
+	u := &pb.Request{
+		Name: "hang",
 	}
 	log.Print(u.String())
 
@@ -22,7 +20,7 @@ func main() {
 
 	log.Print(bs)
 
-	u2 := &user.User{}
+	u2 := &pb.Request{}
 	if err := proto.Unmarshal(bs, u2); err != nil {
 		log.Fatal(err)
 	}
