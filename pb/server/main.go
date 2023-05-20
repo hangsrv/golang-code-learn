@@ -15,7 +15,8 @@ type HelloServer struct {
 }
 
 func (hs *HelloServer) Hello(ctx context.Context, req *pb.Request) (*pb.Response, error) {
-	log.Printf("req[%s]", req.Name)
+	dl, ok := ctx.Deadline()
+	log.Printf("req[%+v] deadline[%+v] ok[%+v]", req.Name, dl, ok)
 	return &pb.Response{Message: "hello " + req.Name}, nil
 }
 
