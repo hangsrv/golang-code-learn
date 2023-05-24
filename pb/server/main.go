@@ -4,7 +4,6 @@ import (
 	"context"
 	"log"
 	"net"
-	"time"
 
 	pb "golang-code-learn/pb/hello_service"
 
@@ -16,8 +15,8 @@ type HelloServer struct {
 }
 
 func (hs *HelloServer) Hello(ctx context.Context, req *pb.Request) (*pb.Response, error) {
-	log.Printf("req[%s]", req.Name)
-	time.Sleep(2 * time.Second)
+	dl, ok := ctx.Deadline()
+	log.Printf("req[%+v] deadline[%+v] ok[%+v]", req.Name, dl, ok)
 	return &pb.Response{Message: "hello " + req.Name}, nil
 }
 
