@@ -15,7 +15,7 @@ CREATE DATABASE test;
 USE test;
 CREATE TABLE `user` (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(50) NOT NULL,
+	name VARCHAR(50) DEFAULT NULL,
 	is_active BOOLEAN DEFAULT FALSE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -27,10 +27,12 @@ ADD column2 VARCHAR(50) NULL,
 ADD column3 VARCHAR(50) NOT NULL;
 
 ALTER TABLE user
-DROP COLUMN column1,
-DROP COLUMN column2,
-DROP COLUMN column3;
+DROP column1,
+DROP column2,
+DROP column3;
 
+ALTER TABLE USER
+MODIFY  column1 BOOLEAN DEFAULT true;
 
 */
 
@@ -38,6 +40,7 @@ type User struct {
 	ID       int
 	Name     string
 	IsActive bool
+	Test     string
 }
 
 func main() {
@@ -108,12 +111,13 @@ func insertData(db *sql.DB, name string, isActive bool) int64 {
 
 // 根据ID查询数据
 func queryDataByID(db *sql.DB, id int) *User {
-	query := "SELECT id, name, is_active FROM user WHERE id = ?"
+	query := "SELECT id, name, is_active, test FROM user WHERE id = ?"
 	row := db.QueryRow(query, id)
 
 	var data User
-	err := row.Scan(&data.ID, &data.Name, &data.IsActive)
+	err := row.Scan(&data.ID, &data.Name, &data.IsActive, &data.Test)
 	if err != nil {
+		log.Fatal(err)
 		if err == sql.ErrNoRows {
 			return nil
 		}
