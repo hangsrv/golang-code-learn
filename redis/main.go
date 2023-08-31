@@ -7,6 +7,10 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
+func init() {
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+}
+
 // docker run -id --name redis -p 6379:6379 redis --requirepass "123456"
 func main() {
 	cli := redis.NewClient(&redis.Options{

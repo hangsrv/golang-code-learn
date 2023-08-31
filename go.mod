@@ -4,6 +4,8 @@ go 1.18
 
 require (
 	github.com/allegro/bigcache v1.2.1
+	github.com/antonmedv/expr v1.12.4
+	github.com/brianvoe/gofakeit/v6 v6.23.2
 	github.com/coocood/freecache v1.2.3
 	github.com/gin-gonic/gin v1.9.0
 	github.com/go-redis/redis/v8 v8.11.5
