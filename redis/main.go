@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"time"
 
 	"github.com/go-redis/redis/v8"
 )
@@ -23,4 +24,8 @@ func main() {
 		log.Fatal(sc.Err())
 	}
 	log.Print(sc.Val())
+
+	cli.Get(context.Background(), "key")
+	cli.Set(context.Background(), "key1", "val1", 10*time.Second)
+	cli.Set(context.Background(), "key2", "val2", 10*time.Second)
 }
